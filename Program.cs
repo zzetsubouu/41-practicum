@@ -8,50 +8,54 @@ namespace _41_practicum
 {
     class Program
     {
-        static double Min(double x, double y)
-        {
-            if (x > y)
-            {
-                return y;
-            }
-            else if (x < y)
-            {
-                return x;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        static double Max(double x, double y)
-        {
-            if (x > y)
-            {
-                return x;
-            }
-            else if (x < y)
-            {
-                return y;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        delegate double HigherOrGreater(double x, double y);
         static void Main(string[] args)
         {
-            HigherOrGreater min = Min;
-            HigherOrGreater max = Max;
+            Library library = new Library();
 
-            Console.WriteLine("введите первое число");
-            double num1 = double.Parse(Console.ReadLine());
-            Console.WriteLine("введите второе число");
-            double num2 = double.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.WriteLine("\nВыберите нужное Вам действие:");
+                Console.WriteLine("1. Добавить книгу;");
+                Console.WriteLine("2. Вывести все книги;");
+                Console.WriteLine("3. Сортировать книги по автору;");
+                Console.WriteLine("4. Сортировать книги по названию;");
+                Console.WriteLine("5. Сортировать книги по издательству;");
+                Console.WriteLine("6. Сортировать книги по жанру;");
+                Console.WriteLine("7. Выход.");
 
-            Console.WriteLine(min(num1, num2));
-            Console.WriteLine(max(num1, num2));
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        library.AddNewBook(Book.CreateBook());
+                        break;
+                    case 2:
+                        library.GetAllBooks();
+                        break;
+                    case 3:
+                        library.SortByAuthor();
+                        Console.WriteLine("Книги отсортированы по автору.");
+                        break;
+                    case 4:
+                        library.SortByTitle();
+                        Console.WriteLine("Книги отсортированы по названию.");
+                        break;
+                    case 5:
+                        library.SortByPublishing();
+                        Console.WriteLine("Книги отсортированы по издательству.");
+                        break;
+                    case 6:
+                        library.SortByGenre();
+                        Console.WriteLine("Книги отсортированы по жанру.");
+                        break;
+                    case 7:
+                        return;
+                    default:
+                        Console.WriteLine("Неверный ввод.");
+                        break;
+                }
+            }
         }
     }
-
 }
